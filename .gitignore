@@ -1,0 +1,25 @@
+# git-ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+
+# Wildcards
+.*.swp
+.*.swo
+*.bak
+*.db
+*.db.*
+*.egg-info
+*.orig
+*.pyc
+*.rej
+*~
+
+# Files
+
+# Generated locale files
+
+# Directories/symlinks
+build
+dist
+pickle
+temp
+bak
