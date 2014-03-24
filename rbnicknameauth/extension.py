@@ -19,23 +19,23 @@ class NicknameAuthBackend(StandardAuthBackend):
     supports_registration = False
 
     def authenticate(self, username, password):
-        print username, password
         user =  StandardAuthBackend.authenticate(self, username, password)
-        if not user:
-            print "doesn't exist or password doesn't match"
-            try:
-                UserModel = get_user_model()
-                user, created = UserModel.objects.get_or_create(**{
-                    UserModel.USERNAME_FIELD: username
-                })
-                # Don't give access to staff or superuser accounts
-                if user.is_staff or user.is_superuser:
-                    return None
-                if created:
-                    user = self.configure_user(user)
-            except Exception as e:
-                print e
-        print "%s should not be none" % user
+
+        if user:
+            return user
+
+        UserModel = get_user_model()
+        user, created = UserModel.objects.get_or_create(**{
+            UserModel.USERNAME_FIELD: username
+        })
+
+        # Don't give access to staff or superuser accounts
+        if user.is_staff or user.is_superuser:
+            return None
+
+        if created:
+            user = self.configure_user(user)
+
         return user
 
     def get_or_create_user(self, username, request):
@@ -44,7 +44,7 @@ class NicknameAuthBackend(StandardAuthBackend):
 
     def configure_user(self, user):
         print dir(user)
-        self.update_password(user, "screenshots")
+        self.update_password(user, "mysupersecurepassword")
         return user
 
 class NicknameAuthJSExtension(JSExtension):
