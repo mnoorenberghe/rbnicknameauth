@@ -1,4 +1,4 @@
-var RBNicknameAuth = {};
+window.RBNicknameAuth = {};
 
 RBNicknameAuth.Extension = RB.Extension.extend({
     initialize: function() {
