@@ -1,0 +1,7 @@
+form.auth-section label[for=id_password] {
+  display: none;
+}
+form.auth-section input[type=password] {
+  position: absolute;
+  visibility: hidden;
+}
